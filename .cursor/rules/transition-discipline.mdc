@@ -1,0 +1,37 @@
+---
+description: Shell transition rules, drawer, screen nav, carousel, prevents crash/bleed/desync
+globs:
+  - www/index.html
+  - www/styles/shell-chrome.css
+  - www/styles/primitives.css
+---
+
+# Transition discipline (SYS-01)
+
+When editing navigation, the nav drawer, bottom carousel, or any full-screen overlay in `www/index.html`:
+
+## Non-negotiable
+
+1. **One animated layer at a time.** Do not run drawer animation + screen reveal + carousel swipe concurrently. Reuse existing gates: `screenNavLock`, `carouselNavBusy`, `navDrawerClosing`, `isNavDrawerActive()`.
+
+2. **Outgoing before incoming.** Close or hide the outgoing layer before showing the incoming one. Screen changes must `await closeNav()` inside `showScreenImpl()` before removing `.hidden` from the target `.screen`.
+
+3. **Awaited `closeNav()`.** `closeNav()` returns a Promise (~`NAV_DRAWER_MS` 220 ms). Any code that changes the visible screen must go through `showScreen()` / `await closeNav()`, never bypass with direct DOM toggles while the drawer is open.
+
+4. **`pointercancel` clears press.** Press feedback uses `.is-pressing` (not `:active` on nav rows). Always pair `pointerdown` with `pointerup` **and** `pointercancel` handlers that remove `.is-pressing`.
+
+5. **Body lock in `finally`.** `html.nav-open` scroll-lock (see `shell-chrome.css`) must be cleared in `closeNav()`'s `.finally()`, not only on the happy path.
+
+## State to respect
+
+| Variable / fn | Role |
+|---------------|------|
+| `navDrawerOpen` | Single source of truth for drawer + hamburger icon |
+| `navDrawerClosing` | Promise while close transition runs |
+| `isNavDrawerActive()` | `true` when open **or** closing, block carousel/swipe |
+| `renderNavToggleIcon()` | Sync `sym-menu` / `sym-close` with `navDrawerOpen` |
+| `showScreen()` | Serializes navigation via `screenNavLock` |
+
+## Before finishing
+
+Run the **Manual regression (SYS-02)** checklist in `README.md` on device after `npm run sync:android`.

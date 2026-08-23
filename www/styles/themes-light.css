@@ -1,0 +1,31 @@
+/* light theme primitive bridges */html{
+  --ui-surface: var(--paper-raised);
+  --ui-surface-raised: var(--paper);
+  --ui-border: var(--ink);
+  --ui-border-dim: rgba(26, 25, 22, 0.2);
+  --ui-text: var(--ink);
+  /* secondary readable text >=4.5:1 on --paper-raised
+     pale grays = disabled/decorative only */
+  --ui-text-secondary: var(--ink-2);
+  --ui-text-disabled: #9a9588;
+  --ui-text-dim: var(--ink-3);
+  --ink-muted: var(--ink-3);
+  --ui-accent: var(--action);
+  --ui-accent-on: var(--paper);
+  --ui-bottom-bar-bg: rgba(255, 255, 255, 0.38);
+  --ui-bottom-bar-bg-flat: rgba(247, 245, 238, 0.72);
+  --ui-topbar-bg: rgba(255, 255, 255, 0.38);
+  --ui-topbar-bg-flat: rgba(247, 245, 238, 0.72);
+  --ui-page-fade: transparent;
+  --glass-frost: rgba(255, 255, 255, 0.38);
+  --glass-sheen: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.08) 22%,
+    transparent 100%
+  );
+  /* todo open items panel (pale sky blue not cream paper) */
+  --ui-surface-open: #e6f4fc;
+  --ui-surface-open-row: #f0f9fe;
+  --ui-surface-open-border: rgba(43, 43, 230, 0.14);
+}

@@ -1,0 +1,26 @@
+{
+  "name": "nekokata",
+  "version": "1.0.0",
+  "description": "nekokata — local-first health scheduler for Android",
+  "scripts": {
+    "sync:android": "cap sync android",
+    "test:smoke": "node scripts/android-smoke-check.cjs",
+    "test:android:build": "cd android && gradlew.bat :app:assembleDebug",
+    "test:android:device": "powershell -ExecutionPolicy Bypass -File scripts/android-device-smoke.ps1",
+    "test:android:carousel-drawer": "powershell -ExecutionPolicy Bypass -File scripts/android-carousel-drawer-test.ps1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/clipboard": "^8.0.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/filesystem": "^8.1.2",
+    "@capacitor/local-notifications": "^8.2.0",
+    "@capacitor/share": "^8.0.1",
+    "@ebarooni/capacitor-calendar": "^8.2.0"
+  }
+}

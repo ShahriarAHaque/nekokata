@@ -1,0 +1,196 @@
+/* lab logbook tokens
+   paper ground hairline structure one action ink
+   cards 14px fields 10px
+   pills 999px for chips/tabs/live island only
+   --shape-squircle aliases --r-card (14px)
+   never alias it to --shape-pill
+   that clipped the centered nav overlay into an oval (BUG-02)
+   fonts stay inter + roboto mono (self-hosted)
+   do not load webfonts from a cdn (csp font-src self + offline)
+   never isolation:isolate on an ancestor of #appHeader or #carouselBar */
+:root {
+	--shape-circle: 50%;
+	--shape-pill: 999px;
+	--r-card: 14px;
+	--r-field: 10px;
+	--radius-card: var(--r-card);
+	--radius-button: var(--r-field);
+	--shape-squircle: var(--r-card);
+
+	--paper: #F2EFE6;
+	--paper-sunk: #EAE6DA;
+	--paper-raised: #FBFAF5;
+	--card: var(--paper-raised);
+	--rule: #DFD9C8;
+	--rule-strong: #C7BFA9;
+
+	--ink: #16150F;
+	--ink-2: #4E4A3D;
+	--ink-3: #837D6C;
+	--ink-muted: var(--ink-3);
+
+	--action: #2A38B1;
+	--action-sunk: #E4E3F6;
+	--heart: #E62E2D;
+	--water: #12688C;
+	--done: #2F6B45;
+	--warn: #8A5A12;
+	--good: var(--done);
+
+	--s1: 4px;
+	--s2: 8px;
+	--s3: 12px;
+	--s4: 16px;
+	--s5: 20px;
+	--s6: 24px;
+	--s8: 32px;
+	--s10: 40px;
+	--s12: 48px;
+
+	--t-label: 11px;
+	--t-small: 13px;
+	--t-body: 15px;
+	--t-title: 19px;
+	--t-display: 34px;
+
+	--lift-bar: 0 -1px 0 var(--rule), 0 -8px 24px -12px rgba(22, 21, 15, 0.16);
+	--lift-sheet: 0 -1px 0 var(--rule), 0 -18px 48px -16px rgba(22, 21, 15, 0.24);
+	--lift-toast: 0 1px 2px rgba(22, 21, 15, 0.1), 0 8px 24px -10px rgba(22, 21, 15, 0.3);
+
+	--dur-fast: 130ms;
+	--dur: 200ms;
+	--dur-slow: 260ms;
+	--enter: cubic-bezier(0.16, 0.84, 0.36, 1);
+	--leave: cubic-bezier(0.55, 0, 0.85, 0.4);
+	--motion-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--motion-out: var(--enter);
+	--motion-in: var(--leave);
+	--motion-morph: var(--dur);
+
+	--z-base: 0;
+	--z-sticky: 10;
+	--z-bar: 10;
+	--z-scrim: 15;
+	--z-sheet: 20;
+	--z-drawer: var(--z-sheet);
+	--z-toast: 30;
+	--z-snackbar: var(--z-toast);
+	--z-dialog: 40;
+
+	--tile-half-h: 48px;
+	--bottom-bar-h: 52px;
+	--bottom-bar-pad-y: 6px;
+	--bottom-bar-lift: max(8px, var(--sab, 0px));
+	--peek: 12px;
+	--carousel-edge-inset: 16px;
+
+	/* fill = wash / pill background (always --ink on top)
+	   mark = dots icons strokes never text */
+	--cat-train-fill: #ff8c42;
+	--cat-train-mark: #e25900;
+	--cat-body-fill: #ff4d6d;
+	--cat-body-mark: #ff2950;
+	--cat-nutri-fill: #4dff9d;
+	--cat-nutri-mark: #009945;
+	--cat-water-fill: #4da6ff;
+	--cat-water-mark: #0682ff;
+	--cat-sleep-fill: #8bb8ff;
+	--cat-sleep-mark: #3080ff;
+	--cat-skin-fill: #e8a0bf;
+	--cat-skin-mark: #da558e;
+	--cat-posture-fill: #a78bfa;
+	--cat-posture-mark: #906bfc;
+	--cat-focus-fill: #fbbf24;
+	--cat-focus-mark: #ac7c00;
+	--cat-knowledge-fill: #60a5fa;
+	--cat-knowledge-mark: #1e82fd;
+	--cat-talent-fill: #f472b6;
+	--cat-talent-mark: #f42f96;
+	--cat-calendar-fill: #a855f7;
+	--cat-calendar-mark: #a851fb;
+
+	--cat-apk-fill: #5b6cff;
+	--cat-apk-mark: #3d4dff;
+	--cat-feature-fill: #38bdf8;
+	--cat-feature-mark: #0284c7;
+	--cat-bug-fill: #ff4d6d;
+	--cat-bug-mark: #ff2950;
+	--cat-other-fill: #7b8cff;
+	--cat-other-mark: #4f5ef0;
+
+	--cat-train: var(--cat-train-fill);
+	--cat-body: var(--cat-body-fill);
+	--cat-nutri: var(--cat-nutri-fill);
+	--cat-water: var(--cat-water-fill);
+	--cat-sleep: var(--cat-sleep-fill);
+	--cat-skin: var(--cat-skin-fill);
+	--cat-posture: var(--cat-posture-fill);
+	--cat-focus: var(--cat-focus-fill);
+	--cat-knowledge: var(--cat-knowledge-fill);
+	--cat-talent: var(--cat-talent-fill);
+	--cat-apk: var(--cat-apk-fill);
+	--cat-feature: var(--cat-feature-fill);
+	--cat-bug: var(--cat-bug-fill);
+	--cat-other: var(--cat-other-fill);
+	--cat-calendar: var(--cat-calendar-fill);
+}
+[data-cat="train"] {
+	--cat-current: var(--cat-train-fill);
+	--cat-current-mark: var(--cat-train-mark);
+}
+[data-cat="body"] {
+	--cat-current: var(--cat-body-fill);
+	--cat-current-mark: var(--cat-body-mark);
+}
+[data-cat="nutri"] {
+	--cat-current: var(--cat-nutri-fill);
+	--cat-current-mark: var(--cat-nutri-mark);
+}
+[data-cat="water"] {
+	--cat-current: var(--cat-water-fill);
+	--cat-current-mark: var(--cat-water-mark);
+}
+[data-cat="sleep"] {
+	--cat-current: var(--cat-sleep-fill);
+	--cat-current-mark: var(--cat-sleep-mark);
+}
+[data-cat="skin"] {
+	--cat-current: var(--cat-skin-fill);
+	--cat-current-mark: var(--cat-skin-mark);
+}
+[data-cat="posture"] {
+	--cat-current: var(--cat-posture-fill);
+	--cat-current-mark: var(--cat-posture-mark);
+}
+[data-cat="focus"] {
+	--cat-current: var(--cat-focus-fill);
+	--cat-current-mark: var(--cat-focus-mark);
+}
+[data-cat="knowledge"] {
+	--cat-current: var(--cat-knowledge-fill);
+	--cat-current-mark: var(--cat-knowledge-mark);
+}
+[data-cat="talent"] {
+	--cat-current: var(--cat-talent-fill);
+	--cat-current-mark: var(--cat-talent-mark);
+}
+[data-cat="apk"] {
+	--cat-current: var(--cat-apk-fill);
+	--cat-current-mark: var(--cat-apk-mark);
+}
+[data-cat="feature"] {
+	--cat-current: var(--cat-feature-fill);
+	--cat-current-mark: var(--cat-feature-mark);
+}
+[data-cat="bug"] {
+	--cat-current: var(--cat-bug-fill);
+	--cat-current-mark: var(--cat-bug-mark);
+}
+[data-cat="other"] {
+	--cat-current: var(--cat-other-fill);
+	--cat-current-mark: var(--cat-other-mark);
+}
+[data-cat="calendar"] {
+	--cat-current: var(--cat-calendar-fill);
+	--cat-current-mark: var(--cat-calendar-mark);
+}

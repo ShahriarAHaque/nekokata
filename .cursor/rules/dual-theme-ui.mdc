@@ -1,0 +1,38 @@
+---
+description: Single-theme UI rules, light editorial paperwork only
+alwaysApply: true
+---
+
+# Light theme UI (single theme)
+
+The app uses one theme: **editorial paperwork** (`html[data-theme="light"]`, cream paper, Inter + Roboto Mono, nekokata blue `#2A38B1`). Dark mode and `#themeToggleBtn` were removed.
+
+## Non-negotiable
+
+When changing **visible UI** (header, nav drawer, bottom bar, carousel, tiles, home stack, live island):
+
+1. **Use CSS variables** from `www/styles/themes-light.css` and tokens, no hard-coded hex unless matching an existing pattern in the same component.
+2. **Scope new styles** under `html[data-theme="light"]` or shared unscoped tokens in `www/styles/tokens.css`.
+3. **Do not add** new `html[data-theme="dark"]` rules or reintroduce a theme toggle.
+
+## Where styles live
+
+| Area | Primary files |
+|------|----------------|
+| Tokens / shapes | `www/styles/tokens.css` |
+| Shared primitives | `www/styles/primitives.css` |
+| Theme colour bridges | `www/styles/themes-light.css` |
+| **Shell chrome (header, drawer, bottom bar, carousel)** | `www/styles/shell-chrome.css` |
+| **Glass material (chrome frost/blur/sheen)** | `www/styles/glass-material.css` |
+| Tile language (category washes, tile radii) | `www/styles/tile-language.css` |
+| Legacy inline CSS | `www/index.html` `<style>`, avoid new rules here, migrate to `www/styles/` |
+
+Stylesheet order in `index.html`: tokens → brand → primitives → … → themes-light → glass-material → shell-chrome → tile-language.
+
+## Contrast
+
+Readable secondary text uses `--ui-text-dim` (bridged to `--ui-text-secondary`). Disabled/decorative only uses `--ui-text-disabled`, `--ui-border`, or `--mono-dim`.
+
+## After `www/` edits
+
+Run `npm run sync:android` before testing on device.

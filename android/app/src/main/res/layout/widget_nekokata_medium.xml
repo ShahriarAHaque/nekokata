@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_card_bg"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:minHeight="110dp"
+    android:orientation="vertical"
+    android:paddingStart="14dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="14dp"
+    android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:id="@+id/widget_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/widget_icon"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/widget_icon_box"
+            android:gravity="center"
+            android:text="●"
+            android:textColor="@color/widget_accent"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:id="@+id/widget_body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:minWidth="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/widget_current_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/widget_preview_now"
+                android:textColor="@color/widget_text"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_current_meta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/widget_preview_now_meta"
+                android:textColor="@color/widget_text_muted"
+                android:textSize="10sp" />
+
+            <ProgressBar
+                android:id="@+id/widget_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="45"
+                android:progressDrawable="@drawable/widget_progress_bar" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/widget_check"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/widget_check_filled"
+            android:contentDescription="@string/widget_check_desc"
+            android:gravity="center"
+            android:text="✓"
+            android:textColor="@color/widget_bg"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_next_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/widget_preview_next"
+        android:textColor="@color/widget_text_muted"
+        android:textSize="10sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/widget_current_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_no_current"
+        android:textColor="@color/widget_text_muted"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+</LinearLayout>

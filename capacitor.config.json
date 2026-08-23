@@ -1,0 +1,12 @@
+{
+  "appId": "com.nekokata.app",
+  "appName": "nekokata",
+  "webDir": "www",
+  "backgroundColor": "#F2EFE6",
+  "plugins": {
+    "SystemBars": {
+      "style": "LIGHT",
+      "insetsHandling": "css"
+    }
+  }
+}

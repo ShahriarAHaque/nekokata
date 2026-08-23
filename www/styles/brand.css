@@ -1,0 +1,48 @@
+/* brand lockup + boot splash
+   keep this sheet early so load-in paints with the logo */
+
+#bootSplash{
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper, #F2EFE6);
+  pointer-events: none;
+}
+#bootSplash img{
+  width: min(82vw, 360px);
+  height: auto;
+}
+#bootSplash.is-done{
+  opacity: 0;
+  transition: opacity 280ms var(--enter, ease);
+}
+@media (prefers-reduced-motion: reduce){
+  #bootSplash.is-done{ transition: none; }
+}
+
+html[data-theme="light"] #appHeader .topbar h1 .brand-mark{
+  width: 28px;
+  height: 28px;
+}
+html[data-theme="light"] .brand-lockup{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+html[data-theme="light"] .brand-lockup-img{
+  width: min(100%, 280px);
+  height: auto;
+  display: block;
+}
+html[data-theme="light"] .brand-pitch{
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  color: var(--ink);
+}

@@ -1,0 +1,124 @@
+/* feedback and progress loops */:root{
+  --feedback-good: #4dff9d;
+  --feedback-good-bg: color-mix(in srgb, var(--feedback-good) 14%, var(--ui-surface));
+}/* multi-channel confirm: green tick pulse (<100ms feel) */
+@keyframes feedback-check-pop{
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}@keyframes feedback-row-glow{
+  0% { background-color: color-mix(in srgb, var(--feedback-good) 22%, transparent); }
+  100% { background-color: transparent; }
+}.ui-check-morph-inner.feedback-pulse,
+.ui-check-morph-inner.feedback-pulse.checked{
+  animation: feedback-check-pop 0.32s var(--motion-spring, ease);
+  background: var(--feedback-good) !important;
+  border-color: var(--feedback-good) !important;
+}.ui-check-morph-inner.feedback-pulse.checked .ui-icon{
+  opacity: 1;
+  color: #0d0d0f;
+}.home-slot-row.feedback-row-flash,
+.todo-row.feedback-row-flash{
+  animation: feedback-row-glow 0.55s ease-out;
+}/* fix #7 touch-down press: scale .97 + tint (both themes) */
+@media (prefers-reduced-motion: no-preference){
+  html .ui-pill,
+  html .ui-circle-btn,
+  html .ui-nav-row,
+  html .live-island,
+  html .coming-up.ui-tile,
+  html .ui-check-morph-inner {
+    transition:
+      transform 0.12s ease,
+      background 0.12s ease,
+      border-color 0.12s ease;
+  }
+}html .ui-pill:active:not(:disabled), html .ui-circle-btn:active:not(:disabled){
+  transform: scale(0.97);
+}html .ui-pill:active:not(:disabled){
+  background: color-mix(in srgb, var(--ui-accent) 16%, var(--ui-surface));
+}html .ui-circle-btn:active:not(:disabled){
+  background: color-mix(in srgb, var(--ui-text) 8%, var(--ui-surface));
+}html #navDrawer .ui-nav-row.is-pressing, html #navDrawer .nav-item.is-pressing{
+  transform: scale(0.97);
+  background: color-mix(in srgb, var(--ui-accent) 12%, var(--ui-surface));
+}html .live-island:active, html .coming-up.ui-tile:active{
+  transform: scale(0.97);
+}/* checkbox: fill on touch-down */
+html .ui-check-morph-inner.is-pressing, html .ui-check-morph-inner:active{
+  transform: scale(0.97);
+}html .ui-check-morph-inner.is-pressing:not(.checked):not(.partial), html .ui-check-morph-inner:active:not(.checked):not(.partial){
+  background: color-mix(in srgb, var(--cat-current, var(--ui-accent)) 65%, var(--ui-surface-raised)) !important;
+  border-color: var(--cat-current, var(--ui-accent)) !important;
+}html .ui-check-morph-inner.is-pressing:not(.checked):not(.partial) .ui-icon, html .ui-check-morph-inner:active:not(.checked):not(.partial) .ui-icon{
+  opacity: 0.92;
+  color: var(--ui-accent-on, #0d0d0f);
+}@media (prefers-reduced-motion: no-preference){
+  .ui-check-morph-inner {
+    transition:
+      width var(--motion-morph) var(--motion-spring),
+      max-width var(--motion-morph) var(--motion-spring),
+      min-width var(--motion-morph) var(--motion-spring),
+      border-radius var(--motion-morph) var(--motion-spring),
+      background var(--motion-morph) ease,
+      border-color var(--motion-morph) ease,
+      transform 0.12s ease;
+  }
+
+  .ui-check-morph-inner.checked {
+    width: 28px !important;
+    max-width: 28px !important;
+    border-radius: var(--shape-pill) !important;
+  }
+}@media (prefers-reduced-motion: reduce){
+  .ui-check-morph-inner.checked {
+    border-radius: var(--shape-pill) !important;
+  }
+}/* forgiveness snackbar with undo icon */
+#snackbar{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(92vw, 420px);
+  pointer-events: auto;
+  padding: 10px 10px 10px 16px;
+  border: 1px solid var(--ui-border-dim);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+}#snackbar.hidden{
+  display: none !important;
+}#snackbar{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(var(--bottom-bar-h) + 16px + var(--sab, 0px));
+  z-index: 46;
+  pointer-events: auto;
+}#snackbarMsg{
+  flex: 1;
+  min-width: 0;
+}.feedback-undo-btn{
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--feedback-good);
+  border-radius: 50%;
+  background: var(--feedback-good-bg);
+  color: var(--feedback-good);
+  cursor: pointer;
+}.feedback-undo-btn.hidden{
+  display: none !important;
+}.feedback-undo-btn .ui-icon{
+  width: 16px;
+  height: 16px;
+}.feedback-undo-btn:hover,
+.feedback-undo-btn:focus-visible{
+  background: color-mix(in srgb, var(--feedback-good) 24%, var(--ui-surface));
+}html #snackbar{
+  background: rgba(247, 245, 238, 0.92);
+  color: var(--ink);
+}

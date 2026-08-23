@@ -1,0 +1,50 @@
+/* shared empty state: tinted icon + one sentence + optional cta */
+html[data-theme="light"] .ui-empty{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 8px 0 16px;
+  padding: 22px 18px;
+  background: var(--ui-surface-raised, var(--paper-raised));
+  border: 1px solid var(--ui-border-dim);
+  border-radius: var(--radius-card);
+  max-width: 36em;
+}
+html[data-theme="light"] .ui-empty-icon{
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--shape-circle);
+  background: color-mix(in srgb, var(--cat-current, var(--ui-accent)) 22%, var(--ui-surface-raised, var(--paper-raised)));
+  color: var(--cat-current-mark, var(--cat-current, var(--ui-accent)));
+}
+html[data-theme="light"] .ui-empty-icon .ui-icon{
+  width: 22px;
+  height: 22px;
+}
+html[data-theme="light"] .ui-empty-copy{
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ui-text-secondary, var(--ui-text-dim));
+}
+html[data-theme="light"] .ui-empty-cta{
+  margin-top: 2px;
+}
+html[data-theme="light"] .ui-empty.hidden{
+  display: none !important;
+}
+html[data-theme="light"] .nutri-log-list .nutri-log-empty-item{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+html[data-theme="light"] .nutri-log-list .nutri-log-empty-item .ui-empty{
+  margin: 0;
+}
+html[data-theme="light"] .measurements-table-wrap.is-empty #mTable{
+  display: none;
+}

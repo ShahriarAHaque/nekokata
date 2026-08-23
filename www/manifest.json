@@ -1,0 +1,15 @@
+{
+  "name": "nekokata",
+  "short_name": "nekokata",
+  "description": "A health scheduler you're meant to outgrow. Local-first. No account. Export everything and delete it.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2EFE6",
+  "theme_color": "#F2EFE6",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

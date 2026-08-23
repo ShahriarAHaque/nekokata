@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">nekokata</string>
+    <string name="title_activity_main">nekokata</string>
+    <string name="package_name">com.nekokata.app</string>
+    <string name="custom_url_scheme">com.nekokata.app</string>
+    <string name="widget_name">nekokata</string>
+    <string name="widget_description">Today\'s schedule on the home screen — what now, what next.</string>
+    <string name="widget_next_label">Next</string>
+    <string name="widget_no_current">Nothing active now</string>
+    <string name="widget_no_schedule">Open app to load today\'s schedule</string>
+    <string name="widget_next_desc">Next task at %1$s — %2$s</string>
+    <string name="widget_check_desc">Mark task done</string>
+    <string name="widget_now_meta">NOW · %1$s</string>
+    <string name="widget_now_range">NOW · %1$s — %2$s</string>
+    <string name="widget_next_line">NEXT · %1$s %2$s</string>
+    <string name="widget_day_header">Today · %1$d of %2$d done</string>
+    <string name="widget_tile_now">NOW %1$s</string>
+    <string name="widget_preview_now">Focus block</string>
+    <string name="widget_preview_now_meta">NOW · 07:00 — 07:20</string>
+    <string name="widget_preview_next">NEXT · 08:00 Walk</string>
+</resources>

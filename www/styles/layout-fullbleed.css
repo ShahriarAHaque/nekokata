@@ -1,0 +1,123 @@
+/* full-bleed feed
+   content edge-to-edge titles/toolbars inset header + bottom bar float above scroll */:root{
+  --screen-chrome-x: calc(16px + var(--sal, 0px));
+  --screen-chrome-x-end: calc(16px + var(--sar, 0px));
+  --carousel-edge-inset-start: var(--screen-chrome-x);
+  --carousel-edge-inset-end: var(--screen-chrome-x-end);
+  --feed-edge-fade: 24px;
+}html .wrap{
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}main.wrap,
+.wrap{
+  width: 100%;
+  max-width: 100%;
+}html .wrap, html main.wrap{
+  padding-top: calc(var(--header-clearance, 88px) + 4px);
+  padding-bottom: calc(var(--carousel-clearance, calc(var(--bottom-bar-lift, 8px) + var(--bottom-bar-h, 44px))) + 20px);
+}main.wrap:has(#screen-home:not(.hidden) #dayPanelBody.context-stack){
+  padding-top: 0;
+  padding-bottom: 0;
+}.screen{
+  width: 100%;
+  max-width: none;
+}/* inset chrome headings toolbars forms (float above full-bleed body) */
+.screen > h2,
+.screen > .screen-head-row,
+.screen > header.dossier,
+.screen > .char-level-card,
+.screen > .reminders-card,
+.screen > .day-picker,
+.screen > .todo-add,
+.screen > .todo-tools,
+.screen > .stats-tools,
+.screen > .nutri-targets,
+.screen > .water-settings-panel,
+.screen > .edit-profile-panel,
+.screen > .data-card,
+.screen > .weigh-card,
+.screen > #nutritionEdit,
+.screen > .todo-due-panel,
+.screen > .nutri-log-card,
+.screen > .add-row,
+.screen > .measurements-table-wrap,
+.home-schedule-header{
+  margin-left: var(--screen-chrome-x);
+  margin-right: var(--screen-chrome-x-end);
+}#appHeader .home-schedule-header{
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}.screen > h2{
+  width: auto;
+}.screen > .measurements-table-wrap{
+  width: auto;
+  max-width: none;
+  box-sizing: border-box;
+}/* full-bleed feed rails */
+.ui-tile-stack,
+.ui-tile-stack.home-schedule,
+#dayPanelBody,
+.fitness-checklist,
+#heatmaps,
+#whrSection,
+.water-progress-card,
+.ui-tile-stack.skill-tree,
+#todoList,
+#todoDueList{
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}/* edge-to-edge tiles in feeds context stack keeps oblong tiles (Fix #3) */
+.ui-tile-stack > .ui-tile,
+.ui-tile-stack .home-slot-row,
+.ui-tile-stack .slot-stack,
+#dayPanelBody:not(.context-stack) .home-slot-row,
+#dayPanelBody:not(.context-stack) .slot-stack,
+.coming-up.ui-tile,
+.fitness-checklist,
+#heatmaps .heat-card,
+#whrSection .stats-collapsible,
+.water-progress-card.ui-tile,
+#todoList .todo-item,
+#todoDueList > .todo-row{
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}/* todo panels: bleed container inset section headers only */
+#screen-todo .day-panel{
+  margin-top: 18px;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}#screen-todo .day-panel .dh,
+#screen-todo .day-panel .todo-open-header{
+  margin-left: var(--screen-chrome-x);
+  margin-right: var(--screen-chrome-x-end);
+}/* keep rounded tiles when explicitly inset (chrome zones) */
+.screen-chrome .ui-tile,
+.char-level-card.ui-tile,
+.reminders-card,
+.weigh-card,
+.nutri-log-card,
+.data-block,
+.edit-profile-panel{
+  border-radius: var(--shape-squircle);
+  border-left: 1px solid var(--ui-border-dim);
+  border-right: 1px solid var(--ui-border-dim);
+}/* content scrolls under floating header / bottom bar no opaque edge wash */
+#appHeader::after,
+.ui-bottom-bar::before{
+  display: none;
+}/* vertical scroll regions horizontal swipe ignored here */
+[data-scroll-lock]{
+  overscroll-behavior: contain;
+}

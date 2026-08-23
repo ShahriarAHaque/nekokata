@@ -1,0 +1,65 @@
+/* command palette quick jump */.command-palette{
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: max(12vh, 48px) 16px 16px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}.command-palette.hidden{
+  display: none !important;
+}.command-palette-panel{
+  width: min(100%, 420px);
+  border: 1px solid var(--ui-border-dim);
+  border-radius: 0;
+  background: var(--ui-surface);
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+}.command-palette-input{
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid var(--ui-border-dim);
+  background: var(--ui-surface-raised, var(--panel2));
+  color: var(--ui-text);
+  font-family: var(--f-mono);
+  font-size: 14px;
+  padding: 14px 16px;
+  outline: none;
+}.command-palette-list{
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  max-height: min(50vh, 320px);
+  overflow-y: auto;
+}.command-palette-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 13px;
+}.command-palette-item:hover,
+.command-palette-item.is-active{
+  background: color-mix(in srgb, var(--ui-text) 8%, transparent);
+}.command-palette-item-label{
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}.command-palette-item-hint{
+  flex: 0 0 auto;
+  font-size: 10px;
+  font-family: var(--f-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ui-text-dim);
+}html.no-blur .command-palette{
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

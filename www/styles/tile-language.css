@@ -1,0 +1,190 @@
+/* tile language
+   shape = meaning signature colour = category id static then tiles live then now bar
+   circle = action pill = tile/toggle squircle + peek = scrollable */html{
+  --r-tile: 28px;
+  --tile-ambient-a: 22%;
+  --tile-ambient-b: 7%;
+  /* schedule inset: oblong tiles dont span the full viewport */
+  --schedule-inset-x: calc(8px + var(--sal, 0px));
+  --schedule-inset-x-end: calc(8px + var(--sar, 0px));
+}/* signature dot (slot 1: icon + category colour) */
+.ui-cat-dot{
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: var(--shape-circle);
+  background: color-mix(in srgb, var(--cat-current, var(--ui-accent)) 28%, var(--ui-surface));
+  border: 2px solid var(--cat-current, var(--ui-accent));
+}/* oblong data tiles: ambient gradient = category (tile anatomy slot 2) */
+.home-slot-row.ui-tile[data-cat],
+.coming-up.ui-tile[data-cat],
+.fitness-checklist .home-slot-row[data-cat]{
+  border-radius: var(--shape-pill) !important;
+  border-color: color-mix(in srgb, var(--cat-current) 32%, var(--ui-border-dim));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cat-current) var(--tile-ambient-a), var(--ui-surface-raised)),
+    color-mix(in srgb, var(--cat-current) var(--tile-ambient-b), var(--ui-surface-raised))
+  ) !important;
+}/* todo rows: cool open-panel base (not cream paper) + category tint */
+#todoList .todo-item .todo-row[data-cat],
+#todoDueList > .todo-row[data-cat]{
+  border-radius: var(--shape-pill) !important;
+  border-color: color-mix(in srgb, var(--cat-current, var(--ui-accent)) 28%, var(--ui-surface-open-border, var(--ui-border-dim)));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cat-current, var(--ui-accent)) var(--tile-ambient-a), var(--ui-surface-open-row, var(--ui-surface-raised))),
+    color-mix(in srgb, var(--cat-current, var(--ui-accent)) var(--tile-ambient-b), var(--ui-surface-open-row, var(--ui-surface-raised)))
+  ) !important;
+}html .ui-nav-icon[data-cat]{
+  background: color-mix(in srgb, var(--cat-current) 22%, var(--ui-surface-raised));
+  border-color: color-mix(in srgb, var(--cat-current) 48%, var(--ui-border-dim));
+  color: var(--cat-current);
+}html .heat-card[data-cat] .glance-kicker, html .stats-collapsible[data-cat] .glance-kicker{
+  color: var(--cat-current);
+}html .live-island-icon.ui-cat-dot{
+  background: color-mix(in srgb, var(--cat-current) 32%, var(--ui-surface-raised));
+  border-color: var(--cat-current);
+}/* schedule feed inset (oblong tiles sit inside the face not edge-to-edge) */
+.ui-tile-stack.home-schedule #dayPanelBody{
+  padding-left: var(--schedule-inset-x);
+  padding-right: var(--schedule-inset-x-end);
+  box-sizing: border-box;
+}#screen-home .coming-up.ui-tile{
+  margin-left: var(--schedule-inset-x);
+  margin-right: var(--schedule-inset-x-end);
+  width: auto;
+  max-width: none;
+}.home-slot-row.ui-tile[data-cat],
+#dayPanelBody .home-slot-row.ui-tile{
+  border-left-width: 1px !important;
+  border-right-width: 1px !important;
+  border-left-style: solid !important;
+  border-right-style: solid !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}.ui-metric-tile,
+.nutri-log-total{
+  border-radius: var(--shape-pill) !important;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--ui-text) 6%, var(--ui-surface)),
+    var(--ui-surface)
+  );
+}.nutri-summary-tile.ui-tile[data-cat="nutri"]{
+  border-radius: var(--r-tile) !important;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--cat-nutri) 18%, var(--ui-surface)),
+    var(--ui-surface)
+  ) !important;
+}.water-progress-card.ui-tile[data-cat="water"]{
+  border-radius: var(--r-tile) !important;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--cat-water) 16%, var(--ui-surface)),
+    var(--ui-surface)
+  ) !important;
+}/* squircle + peek: focal stack cards */
+#dayPanelBody.context-stack > .slot-stack.stack-focus .home-slot-row{
+  border-radius: var(--r-tile) !important;
+  min-height: calc(var(--tile-half-h) * 1.4);
+}#dayPanelBody.context-stack > .slot-stack.stack-peek .home-slot-row{
+  border-radius: var(--shape-pill) !important;
+  opacity: 0.92;
+}/* NOW tint handled in contextual-stack.css (both themes) */
+
+/* now bar: pill over blur gradient live = category tint */
+body.has-now-playing .ui-bottom-bar{
+  overflow: hidden;
+}body.has-now-playing .ui-bottom-bar::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--cat-current, var(--cat-train)) 28%, transparent),
+    transparent 72%
+  );
+}body.has-now-playing .ui-bottom-bar > *{
+  position: relative;
+  z-index: 1;
+}body.has-now-playing #liveIsland.live-island--expanded ~ .ui-bottom-next,
+body.has-now-playing:has(#liveIsland.live-island--expanded) .ui-bottom-bar{
+  overflow: visible;
+}#liveIsland[data-cat]{
+  --cat-current: var(--cat-train);
+}#liveIsland[data-cat="body"]{ --cat-current: var(--cat-body); }#liveIsland[data-cat="nutri"]{ --cat-current: var(--cat-nutri); }#liveIsland[data-cat="water"]{ --cat-current: var(--cat-water); }#liveIsland[data-cat="sleep"]{ --cat-current: var(--cat-sleep); }#liveIsland[data-cat="skin"]{ --cat-current: var(--cat-skin); }#liveIsland[data-cat="posture"]{ --cat-current: var(--cat-posture); }#liveIsland[data-cat="focus"]{ --cat-current: var(--cat-focus); }#liveIsland[data-cat="knowledge"]{ --cat-current: var(--cat-knowledge); }#liveIsland[data-cat="talent"]{ --cat-current: var(--cat-talent); }.live-island-wrap.live-island--live .live-island{
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cat-current) 16%, var(--ui-surface-raised, var(--panel2))),
+    color-mix(in srgb, var(--cat-current) 5%, var(--ui-surface-raised, var(--panel2)))
+  );
+  border-color: color-mix(in srgb, var(--cat-current) 28%, var(--ui-border-dim));
+}.live-island-wrap.live-island--live .live-island-pulse{
+  background: var(--cat-current);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--cat-current) 45%, transparent);
+}@keyframes live-island-pulse-cat{
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--cat-current) 45%, transparent); }
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}.live-island-wrap.live-island--live .live-island-pulse{
+  animation-name: live-island-pulse-cat;
+}.live-island-split[data-cat]{
+  border-color: color-mix(in srgb, var(--cat-current) 22%, var(--ui-border-dim));
+}.live-island-progress-fill{
+  background: var(--cat-current, var(--signal, var(--ui-accent)));
+}.live-island-card{
+  border-radius: var(--r-tile) !important;
+}/* glance tiles: squircle cards category stripe */
+.heat-card.ui-tile[data-cat],
+.stats-collapsible.ui-tile[data-cat],
+.skill-tree .node.ui-tile[data-cat]{
+  border-radius: var(--r-tile) !important;
+}/* stats & history category ambient surfaces (light) */
+html .heat-card.ui-tile[data-cat],
+html .stats-collapsible.ui-tile[data-cat]{
+  border-color: color-mix(in srgb, var(--cat-current) 28%, var(--ui-border-dim));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cat-current) 16%, var(--paper-raised)),
+    color-mix(in srgb, var(--cat-current) 5%, var(--paper-raised))
+  ) !important;
+}html .chart-card[data-cat]{
+  border-color: color-mix(in srgb, var(--cat-current) 22%, var(--ui-border-dim));
+  background: color-mix(in srgb, var(--cat-current) 8%, var(--paper-raised)) !important;
+}html .glance-row[data-cat],
+html .chart-card[data-cat] .glance-row{
+  background: color-mix(in srgb, var(--cat-current) 11%, var(--paper-raised));
+  border-color: color-mix(in srgb, var(--cat-current) 22%, var(--ui-border-dim));
+}html .ui-tile[data-cat]::before{
+  background: linear-gradient(
+    180deg,
+    var(--cat-current),
+    color-mix(in srgb, var(--cat-current) 55%, transparent)
+  );
+}.glance-row-icon{
+  background: color-mix(in srgb, var(--cat-current, var(--ui-accent)) 22%, var(--ui-surface));
+  border-color: color-mix(in srgb, var(--cat-current, var(--ui-accent)) 45%, transparent);
+}/* circle->pill morph: task checkbox uses category signature when done */
+.home-slot-row .ui-check-morph-inner.checked,
+.fitness-checklist .ui-check-morph-inner.checked{
+  background: color-mix(in srgb, var(--cat-current, var(--ui-accent)) 85%, var(--ui-surface)) !important;
+  border-color: var(--cat-current, var(--ui-accent)) !important;
+}/* signal actions stay fuchsia (log done / undo) not category-colored */
+#nowSheetLog.ui-signal,
+.feedback-undo-btn{
+  background: var(--signal, #d946ef) !important;
+  border-color: var(--signal, #d946ef) !important;
+  color: var(--black) !important;
+}/* list edge action: copy stays muted border add matches circle-btn chrome */
+#copyDayBtn.ui-circle-btn,
+#addEntryBtn.ui-circle-btn{
+  border-color: var(--ui-border-dim);
+}@media (prefers-reduced-motion: reduce){
+  .live-island-wrap.live-island--live .live-island-pulse {
+    animation: none !important;
+  }
+}

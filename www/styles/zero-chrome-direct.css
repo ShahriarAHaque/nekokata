@@ -1,0 +1,23 @@
+/* deep-link cards and preload affordances */.coming-up .cu-progress{
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: 11px;
+  font-family: var(--f-mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ui-text-dim);
+  letter-spacing: 0.04em;
+}.coming-up .cu-resume{
+  flex: 0 0 auto;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--f-mono);
+  padding: 4px 10px;
+  border-radius: var(--shape-pill);
+  border: 1px solid var(--ui-border-dim);
+  color: var(--ui-text);
+}.coming-up:focus-visible .cu-resume,
+.coming-up:hover .cu-resume{
+  border-color: var(--ui-text);
+}

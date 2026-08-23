@@ -1,0 +1,104 @@
+/* glass material
+   chrome only (header shell bottom bar nav drawer)
+   content stays opaque
+   stack: blur <=40px frost 10-25% specular edge top sheen solid fallback */
+
+html {
+  --glass-blur: 24px;
+  --glass-saturate: 1.45;
+  --glass-edge: color-mix(in srgb, var(--ui-text) 45%, transparent);
+  --glass-edge-soft: color-mix(in srgb, var(--ui-text) 14%, transparent);
+  --glass-float-shadow: 0 8px 32px rgba(26, 25, 22, 0.1);
+  --glass-inset-sheen: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* header chrome glass on shell only (topbar stays transparent inside) */
+html #appHeader .header-shell {
+  background: var(--glass-frost);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-color: var(--glass-edge-soft);
+  box-shadow: var(--glass-inset-sheen);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+html #appHeader .header-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--glass-sheen);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#appHeader .header-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* bottom bar + nav drawer single frosted shell */
+html .ui-bottom-bar {
+  background: var(--glass-frost);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-color: var(--glass-edge-soft);
+  box-shadow: var(--glass-float-shadow), var(--glass-inset-sheen);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* inner pills stay readable but let the shell frost show through */
+html .ui-bottom-bar .live-island,
+html .ui-bottom-bar .ui-bottom-next {
+  background: color-mix(in srgb, var(--paper-raised) 58%, transparent) !important;
+  border-color: color-mix(in srgb, var(--ui-border-dim) 65%, transparent) !important;
+}
+
+html .ui-bottom-bar .live-island[data-cat],
+html .ui-bottom-bar .ui-bottom-next[data-cat] {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cat-current) 14%, transparent),
+    color-mix(in srgb, var(--paper-raised) 52%, transparent)
+  ) !important;
+}
+
+/* dots/nav no nested blur (preserves carousel touch + layout) */
+html .ui-bottom-bar .live-island-split,
+html .ui-bottom-bar .ui-carousel-nav,
+html .ui-bottom-bar .ui-page-dots,
+html .ui-bottom-bar .car-item {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* semi-transparent fallback when blur unsupported or gated off */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html #appHeader .header-shell {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--ui-topbar-bg);
+  }
+
+  html .ui-bottom-bar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--ui-bottom-bar-bg);
+  }
+}
+
+html.no-blur #appHeader .header-shell,
+html.no-blur .ui-bottom-bar {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html.no-blur #appHeader .header-shell {
+  background: var(--ui-topbar-bg);
+}
+
+html.no-blur .ui-bottom-bar {
+  background: var(--ui-bottom-bar-bg);
+}
