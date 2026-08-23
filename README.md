@@ -8,6 +8,10 @@ Local-first. No account. Export everything and delete it.
 
 Offline daily planner for Android. Schedule, habits, body, water, and todos sit on the device, no cloud, no subscription. The home-screen widget answers “what now?” without opening the app.
 
+<p align="center">
+  <img src="demo.gif" alt="Adding a Work slot from the empty schedule" width="320">
+</p>
+
 ## What's here
 
 - `www/` is the app (`index.html` holds most of the UI and logic)
@@ -87,4 +91,4 @@ Hobby use only. See `LICENSE`. You can run and tinker with nekokata as a private
 
 ## Icons
 
-Launcher icons: `android/app/src/main/res/mipmap-*` (adaptive foreground is the mipmap PNG). Web icons: `www/icon-192.png`, `www/icon-512.png`, `www/icons/brand-mark.png`, `www/icons/brand-lockup.png`. README banner: `www/icons/readme-banner.png`.
+Launcher icons: `android/app/src/main/res/mipmap-*` (adaptive foreground is the mipmap PNG). Web icons: `www/icon-192.png`, `www/icon-512.png`, `www/icons/brand-mark.png`, `www/icons/brand-lockup.png`. README banner: `www/icons/readme-banner.png`. README demo: `demo.gif`.
